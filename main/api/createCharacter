@@ -7,37 +7,36 @@
   },
   "servers": [
     {
-      "url": "https://raw.githubusercontent.com/thedeuce2/lifesim/main/api/createCharacter",
-      "description": "GitHub-hosted API for Life Simulation Game"
+      "url": "https://your-real-api-url.com/createCharacter",
+      "description": "Your hosted API endpoint for character creation"
     }
   ],
   "paths": {
     "/": {
-      "get": {
+      "post": {
         "summary": "Defines and locks in the player’s character profile.",
         "operationId": "createCharacter",
-        "parameters": [
-          {
-            "name": "characterDetails",
-            "in": "query",
-            "required": true,
-            "description": "A detailed description of the player’s character including appearance, background, personality, etc.",
-            "schema": {
-              "type": "string",
-              "format": ""
-            }
-          },
-          {
-            "name": "confirmation",
-            "in": "query",
-            "required": true,
-            "description": "Final confirmation to create and lock the character (e.g., must be 'yes' to proceed)",
-            "schema": {
-              "type": "string",
-              "format": ""
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "characterDetails": {
+                    "type": "string",
+                    "description": "A detailed description of the player’s character including appearance, background, personality, etc."
+                  },
+                  "confirmation": {
+                    "type": "string",
+                    "description": "Final confirmation to create and lock the character (must be 'yes')"
+                  }
+                },
+                "required": ["characterDetails", "confirmation"]
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "Character profile successfully created.",

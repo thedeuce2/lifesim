@@ -1,0 +1,57 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Character Creation",
+    "version": "1.0.0",
+    "description": "The user uses this to set aspects of their character, which cannot be altered again until done in game through realistic avenues, such as getting a haircut, working out obsessively, or getting plastic surgery."
+  },
+  "servers": [
+    {
+      "url": "https://raw.githubusercontent.com/thedeuce2/lifesim/main/api/createCharacter",
+      "description": "GitHub-hosted API for Life Simulation Game"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Defines and locks in the player’s character profile.",
+        "operationId": "createCharacter",
+        "parameters": [
+          {
+            "name": "characterDetails",
+            "in": "query",
+            "required": true,
+            "description": "A detailed description of the player’s character including appearance, background, personality, etc.",
+            "schema": {
+              "type": "string",
+              "format": ""
+            }
+          },
+          {
+            "name": "confirmation",
+            "in": "query",
+            "required": true,
+            "description": "Final confirmation to create and lock the character (e.g., must be 'yes' to proceed)",
+            "schema": {
+              "type": "string",
+              "format": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Character profile successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Character creation failed or already exists."
+          }
+        }
+      }
+    }
+  }
+}
